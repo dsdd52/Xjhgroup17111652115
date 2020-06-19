@@ -1,0 +1,18 @@
+appid: wx95838c1839a77eef
+secret: e29f6ac759971df73ed2ca48db6b6378
+
+
+DEV:
+  mysql-url: jdbc:mysql://rm-2zeyjl82b272087308o.mysql.rds.aliyuncs.com:3306/mymusicclub?useSSL=false
+  mysql-username: root
+  mysql-password: RootAster2020
+#  file-path: F:/MyCloudMusic-file/
+#  serverUrl: http://localhost:8080/MyCloudMusic
+
+  file-path: /usr/local/CloudMusic-res/
+  static-locations: file:/usr/local/CloudMusic-res/
+  serverUrl: http://192.144.141.198:8080/MyCloudMusic
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB

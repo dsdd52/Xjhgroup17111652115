@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.server.mycloudmusic.cloudmusic.mapper.MusicMapper">
+  <resultMap id="BaseResultMap" type="com.server.mycloudmusic.cloudmusic.entity.Music">
+    <!--@mbg.generated-->
+    <!--@Table music-->
+    <id column="music_id" jdbcType="INTEGER" property="musicId" />
+    <result column="music_name" jdbcType="VARCHAR" property="musicName" />
+    <result column="music_collection" jdbcType="INTEGER" property="musicCollection" />
+    <result column="music_artist" jdbcType="INTEGER" property="musicArtist" />
+    <result column="music_number" jdbcType="INTEGER" property="musicNumber" />
+    <result column="music_lenth" jdbcType="INTEGER" property="musicLenth" />
+    <result column="music_language" jdbcType="VARCHAR" property="musicLanguage" />
+    <result column="popularity" jdbcType="INTEGER" property="popularity" />
+    <result column="local_address" jdbcType="VARCHAR" property="localAddress" />
+    <result column="music_img" jdbcType="VARCHAR" property="musicImg" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    music_id, music_name, music_collection, music_artist, music_number, music_lenth,
+    music_language, popularity, local_address, music_img
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from music
+    where music_id = #{musicId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from music
+    where music_id = #{musicId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="music_id" keyProperty="musicId" parameterType="com.server.mycloudmusic.cloudmusic.entity.Music" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into music (music_name, music_collection, music_artist,
+      music_number, music_lenth, music_language,
+      popularity, local_address, music_img
+      )
+    values (#{musicName,jdbcType=VARCHAR}, #{musicCollection,jdbcType=VARCHAR}, #{musicArtist,jdbcType=VARCHAR},
+      #{musicNumber,jdbcType=INTEGER}, #{musicLenth,jdbcType=INTEGER}, #{musicLanguage,jdbcType=VARCHAR},
+      #{popularity,jdbcType=INTEGER}, #{localAddress,jdbcType=VARCHAR}, #{musicImg,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.server.mycloudmusic.cloudmusic.entity.Music">
+    <!--@mbg.generated-->
+    update music
+    set music_name = #{musicName,jdbcType=VARCHAR},
+      music_collection_id = #{musicCollection,jdbcType=VARCHAR},
+      music_artist_id = #{musicArtist,jdbcType=VARCHAR},
+      music_number = #{musicNumber,jdbcType=INTEGER},
+      music_lenth = #{musicLenth,jdbcType=INTEGER},
+      music_language = #{musicLanguage,jdbcType=VARCHAR},
+      popularity = #{popularity,jdbcType=INTEGER},
+      local_address = #{localAddress,jdbcType=VARCHAR},
+      music_img = #{musicImg,jdbcType=VARCHAR}
+    where music_id = #{musicId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAllMusic" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from music
+  </select>
+
+  <select id="selectTopMusic" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from music
+    ORDER BY popularity
+    LIMIT 0,10
+  </select>
+
+  <select id="selectMusicByName" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from music
+    where music_name
+    like #{name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectMusicByCollection" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from music
+    where music_collection=#{musicCollection,jdbcType=VARCHAR}
+  </select>
+  <select id="selectMusicByArtist" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from music
+    where music_artist=#{musicArtist,jdbcType=VARCHAR}
+  </select>
+
+
+
+
+
+
+</mapper>

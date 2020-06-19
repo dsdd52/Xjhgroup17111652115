@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.server.mycloudmusic.cloudmusic.mapper.CollectionMapper">
+  <resultMap id="BaseResultMap" type="com.server.mycloudmusic.cloudmusic.entity.CollectionBean">
+    <!--@mbg.generated-->
+    <!--@Table `collection`-->
+    <id column="collection_id" jdbcType="INTEGER" property="collectionId" />
+    <result column="collection_name" jdbcType="VARCHAR" property="collectionName" />
+    <result column="collection_artist" jdbcType="INTEGER" property="collectionArtist" />
+    <result column="collection_published_date" jdbcType="DATE" property="collectionPublishedDate" />
+    <result column="collection_sub_music" jdbcType="VARCHAR" property="collectionSubMusic" />
+    <result column="collection_publisher" jdbcType="VARCHAR" property="collectionPublisher" />
+    <result column="collection_language" jdbcType="VARCHAR" property="collectionLanguage" />
+    <result column="collection_info" jdbcType="VARCHAR" property="collectionInfo" />
+    <result column="collection_img" jdbcType="VARCHAR" property="collectionImg" />
+    <result column="popularity" jdbcType="INTEGER" property="popularity" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    collection_id, collection_name, collection_artist, collection_published_date, collection_sub_music,
+    collection_publisher, collection_language, collection_info, collection_img, popularity
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from `collection`
+    where collection_id = #{collectionId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from `collection`
+    where collection_id = #{collectionId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" keyColumn="collection_id" keyProperty="collectionId" parameterType="com.server.mycloudmusic.cloudmusic.entity.CollectionBean" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into `collection` (collection_name, collection_artist,
+      collection_published_date, collection_sub_music,
+      collection_publisher, collection_language,
+      collection_info, collection_img, popularity
+      )
+    values (#{collectionName,jdbcType=VARCHAR}, #{collectionArtist,jdbcType=INTEGER},
+      #{collectionPublishedDate,jdbcType=DATE}, #{collectionSubMusic,jdbcType=VARCHAR},
+      #{collectionPublisher,jdbcType=VARCHAR}, #{collectionLanguage,jdbcType=VARCHAR},
+      #{collectionInfo,jdbcType=VARCHAR}, #{collectionImg,jdbcType=VARCHAR}, #{popularity,jdbcType=INTEGER}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.server.mycloudmusic.cloudmusic.entity.CollectionBean">
+    <!--@mbg.generated-->
+    update `collection`
+    set collection_name = #{collectionName,jdbcType=VARCHAR},
+      collection_artist = #{collectionArtist,jdbcType=INTEGER},
+      collection_published_date = #{collectionPublishedDate,jdbcType=DATE},
+      collection_sub_music = #{collectionSubMusic,jdbcType=VARCHAR},
+      collection_publisher = #{collectionPublisher,jdbcType=VARCHAR},
+      collection_language = #{collectionLanguage,jdbcType=VARCHAR},
+      collection_info = #{collectionInfo,jdbcType=VARCHAR},
+      collection_img = #{collectionImg,jdbcType=VARCHAR},
+      popularity = #{popularity,jdbcType=INTEGER}
+    where collection_id = #{collectionId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from `collection`
+  </select>
+
+  <select id="selectByName" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from `collection`
+    where collection_name
+    like #{collectionName,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

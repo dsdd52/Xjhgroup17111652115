@@ -1,0 +1,38 @@
+env: DEV
+
+spring:
+  profiles:
+    include: constant
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: ${${env}.mysql-url}
+    username: ${${env}.mysql-username}
+    password: ${${env}.mysql-password}
+  mvc:
+    static-path-pattern: /resource/**
+  resources:
+    static-locations: file:${gen.file-path}
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 200MB
+
+gen:
+  file-path: ${${env}.file-path}
+
+
+serverUrl: ${${env}.file-path}
+
+wechat:
+  appId: ${appid}
+  secret: ${secret}
+
+server:
+  servlet:
+    context-path: /cloudmusic
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.server.mycloudmusic.cloudmusic.entity
